@@ -65,10 +65,10 @@ link "#{node['typo3']['root']}/index.php" do
   to "#{node['typo3']['root']}/typo3_src/typo3_src-#{node['typo3']['version']}/index.php"
 end
 
-link "#{node['typo3']['root']}/typo3/" do
+link "#{node['typo3']['root']}/typo3" do
   to "#{node['typo3']['root']}/typo3_src/typo3_src-#{node['typo3']['version']}/typo3/"
 end
 
-link "#{node['typo3']['root']}/t3lib/" do
+link "#{node['typo3']['root']}/t3lib" do
   to "#{node['typo3']['root']}/typo3_src/typo3_src-#{node['typo3']['version']}/t3lib/"
 end
