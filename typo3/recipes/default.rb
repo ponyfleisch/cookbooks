@@ -61,14 +61,14 @@ bash 'extract typo3 source' do
   not_if { ::File.exists?(extract_path) }
 end
 
-link "#{node['typo3']['root']}/typo3_src/typo3_src-#{node['typo3']['version']}/index.php" do
-  to "#{node['typo3']['root']}/index.php"
+link "#{node['typo3']['root']}/index.php" do
+  to "#{node['typo3']['root']}/typo3_src/typo3_src-#{node['typo3']['version']}/index.php"
 end
 
-link "#{node['typo3']['root']}/typo3_src/typo3_src-#{node['typo3']['version']}/typo3/" do
-  to "#{node['typo3']['root']}/typo3/"
+link "#{node['typo3']['root']}/typo3/" do
+  to "#{node['typo3']['root']}/typo3_src/typo3_src-#{node['typo3']['version']}/typo3/"
 end
 
-link "#{node['typo3']['root']}/typo3_src/typo3_src-#{node['typo3']['version']}/t3lib/" do
-  to "#{node['typo3']['root']}/t3lib/"
+link "#{node['typo3']['root']}/t3lib/" do
+  to "#{node['typo3']['root']}/typo3_src/typo3_src-#{node['typo3']['version']}/t3lib/"
 end
