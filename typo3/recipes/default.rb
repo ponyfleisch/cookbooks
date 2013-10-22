@@ -36,12 +36,39 @@ directory "#{node['typo3']['root']}/typo3_src/" do
 end
 
 
+directory "#{node['typo3']['root']}/uploads/" do
+  owner "root"
+  group "root"
+  mode 0777
+  action :create
+end
+
+
+directory "#{node['typo3']['root']}/typo3temp/" do
+  owner "root"
+  group "root"
+  mode 0777
+  action :create
+end
+
 bash 'extract typo3 source' do
   extract_path = "#{node['typo3']['root']}/typo3_src/typo3_src-#{node['typo3']['version']}"
-  
+
   cwd "#{node['typo3']['root']}/typo3_src/"
   code <<-EOH
     tar xzf #{Chef::Config[:file_cache_path]}/typo3-src-#{node['typo3']['version']}.tar.gz
     EOH
   not_if { ::File.exists?(extract_path) }
+end
+
+link "#{node['typo3']['root']}/typo3_src/typo3_src-#{node['typo3']['version']}/index.php" do
+  to "#{node['typo3']['root']}/index.php"
+end
+
+link "#{node['typo3']['root']}/typo3_src/typo3_src-#{node['typo3']['version']}/typo3/" do
+  to "#{node['typo3']['root']}/typo3/"
+end
+
+link "#{node['typo3']['root']}/typo3_src/typo3_src-#{node['typo3']['version']}/t3lib/" do
+  to "#{node['typo3']['root']}/t3lib/"
 end
