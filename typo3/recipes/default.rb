@@ -32,6 +32,7 @@ directory "#{node['typo3']['root']}/typo3_src/" do
   owner "root"
   group "root"
   mode 0755
+  recursive true
   action :create
 end
 
