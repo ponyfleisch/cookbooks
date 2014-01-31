@@ -72,3 +72,21 @@ end
 link "#{node['typo3']['root']}/t3lib" do
   to "#{node['typo3']['root']}/typo3_src/typo3_src-#{node['typo3']['version']}/t3lib/"
 end
+
+bash 'create db' do
+  code <<-EOH
+    mysql -u root --password=#{node['mysql']['server_root_password']} -e "CREATE DATABASE IF NOT EXISTS #{node['typo3']['dbname']}"
+    mysql -u root --password=#{node['mysql']['server_root_password']} -e "GRANT ALL ON #{node['typo3']['dbname']}.* TO #{node['typo3']['dbuser']}@localhost IDENTIFIED BY '#{node['typo3']['dbpasswd']}'"
+    EOH
+end
+
+bash 'install db' do
+  code <<-EOH
+    mysql -u root --password=#{node['mysql']['server_root_password']} #{node['typo3']['dbname']} < #{node['typo3']['dumpfile']}
+    EOH
+  not_if { node['typo3']['db_installed'] }
+  node['typo3']['db_installed'] = true
+end
+
+
+
