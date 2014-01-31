@@ -85,7 +85,7 @@ bash 'install db' do
     mysql -u root --password=#{node['mysql']['server_root_password']} #{node['typo3']['dbname']} < #{node['typo3']['dumpfile']}
     EOH
   not_if { node['typo3']['db_installed'] }
-  node['typo3']['db_installed'] = true
+  node.default['typo3']['db_installed'] = true
 end
 
 
