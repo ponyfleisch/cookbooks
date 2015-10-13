@@ -72,6 +72,7 @@ end
 
 link "#{node['typo3']['root']}/t3lib" do
   to "#{node['typo3']['root']}/typo3_src/typo3_src-#{node['typo3']['version']}/t3lib/"
+  ignore_failure true
 end
 
 bash 'create db' do
